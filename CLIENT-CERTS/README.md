@@ -22,6 +22,6 @@
 - In the pipeline, add an "Evaluate Variables" stage, and check ```$trigger.parameters.name}``` to see if "MYVALUE" shows up.
 
 # Debugging  
-- Debug using: ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://spinnaker-opsmx-x509-api.opsmx.sk/applications```
+- Debug using: ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://spinnaker-opsmx-x509-api.opsmx.com/applications```
 - or ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://opsmx-gate-x509:443/applications``` from inside the halyard pod
 - Try adding "--insecure" to see if that gets a response. If so, check your client certs.
