@@ -15,7 +15,7 @@
 - ```spin -k app list``` to check
 - ```spin -k pi exec -a APPNAME -n PIPE-NAME``` to execute a pipeline
 - ```spin -k pi exec -h``` to get help, type as much as you can and put -h to get specific help
-- Note: using "-k" option is mandatory unless you are using public certs known to the OS.
+- Note: 
 
 
 # Executing a pipeline with parameters
@@ -27,3 +27,9 @@
 - Debug using: ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://spinnaker-opsmx-x509-api.opsmx.com/applications```
 - or ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://opsmx-gate-x509/applications``` from inside the halyard pod
 - Try adding "--insecure" to see if that gets a response. If so, check your client certs.
+
+# Using "-k" in spin-cli
+- using "-k" option is mandatory unless you are using public certs known to the OS OR you import the CA into the OS trust certificates store
+- For ubuntu, follow instructions here: https://ubuntu.com/server/docs/install-a-root-ca-certificate-in-the-trust-store
+- For Mac, {TODO: fill the link here}
+- Once the ca.crt used by the server.crt is trusted, "-k" option in spin-cli commands is not required
