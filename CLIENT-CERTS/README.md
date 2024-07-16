@@ -13,7 +13,15 @@
 - Download spin-cli from here: https://spinnaker.io/docs/setup/other_config/spin/
 - Edit sample config.spin as appropriate and place it in ~/.spin/config
 - ```spin -k app list``` to check
+- ```spin -k pi exec -a APPNAME -n PIPE-NAME``` to execute a pipeline
+- ```spin -k pi exec -h``` to get help, type as much as you can and put -h to get specific help
+
+# Executing a pipeline with parameters
+- POST a json as shown below to the /pipelines/{application name}/{pipeline-name} end point. E.g.
+- ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://opsmx-gate-x509/pipelines/opsmx-gitops/curl-trig -H "accept: */*" -H "Content-Type: application/json" -d '{"parameters":{"name":"MYVALUE","animal":"dog"}}'```
+- In the pipeline, add an "Evaluate Variables" stage, and check ```$trigger.parameters.name}``` to see if "MYVALUE" shows up.
+
+# Debugging  
 - Debug using: ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://spinnaker-opsmx-x509-api.opsmx.sk/applications```
 - or ```curl --key client.key --cert client.crt --cacert ca.crt -vvv https://opsmx-gate-x509:443/applications``` from inside the halyard pod
 - Try adding "--insecure" to see if that gets a response. If so, check your client certs.
-
