@@ -7,7 +7,7 @@ This repo contains all the files and instructions for setting up x509 Spinnaker 
 - JKS folder: JKS and create k8s secret for gate.jks
 - YAMLS folder: Create the x509-secret and Deploy opsmx-gate-x509 deployment, ensure that the pod comes to running status and remains there for a min or two
 
-## Testing Instructions (details in CLIENT_CERTS folder)
+## Testing Instructions
 - Follow the instructions in the "CLIENT-CERTS" folder, ensure to use the SAME ca.crt and ca.key as was used for creating server.crt/key
 - Once client.crt and client.key are generated, test it using curl
 - if it does not work, test it from inside the halyard pod (copy the ca.crt, client.crt+key into the pod)
