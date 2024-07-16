@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: opsmx-x509
+    cluster: opsmx-gate-x509
+    team: opsmx
+    project: spin
+  name: opsmx-gate-x509
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opsmx-x509
+      cluster: opsmx-gate-x509
+  template:
+    metadata:
+      labels:
+        app: opsmx-x509
+        cluster: opsmx-gate-x509
+    spec:
+      affinity: {}
+      containers:
+        - env:
+            # Al DD enviroment variables can be deleted if not using DataDog
+            - name: DD_LOGS_INJECTION
+              value: "true"
+            - name: DD_APP_NAME
+              value: spin-gate-x509
+            - name: DD_ENTITY_ID
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.uid
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.podIP
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['tags.datadoghq.com/env']
+            - name: DD_SERVICE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['tags.datadoghq.com/service']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['tags.datadoghq.com/version']
+          image: quay.io/opsmxpublic/ubi8-gate-cve:1.30.120240105 # quay.io/opsmxpublic/ubi8-oes-gate:7eafeaa5-37
+          imagePullPolicy: IfNotPresent
+          lifecycle: {}
+          name: gate
+          ports:
+            - containerPort: 8084
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+            - mountPath: /opt/spinnaker/config
+              name: spin-gate-files
+            - mountPath: /opt/saml
+              name: x509-gate-files-jks
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - emptyDir: {}
+          name: blocklist
+        - name: spin-gate-files
+          secret:
+            defaultMode: 420
+            secretName: opsmx-x509-gate-secret
+        - name: x509-gate-files-jks
+          secret:
+            defaultMode: 420
+            secretName: x509gatejks
