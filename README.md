@@ -1,6 +1,15 @@
 # x509-gate
 This repo contains all the files and instructions for setting up x509 Spinnaker gate
 
+
+## Setup Instructions
+- In the YAMLs, folder, create ONLY the k8s service
+- Create server-certs, JKS and create k8s secret for gate.jks
+- Deploy opsmx-gate-x509, ensure that the JKS is mounted correct
+- Create the k8s service
+- Create a LoadBalancer that routes traffic to the k8s service WITHOUT TLS termination or modification
+[ use of Ingress is discouraged. If we need to tls-passthrough must be enabled and tls-termination should be configured in the ingress]
+
 ## SERVER-CERTS folder contains 
 - Instructions for creating server.crt and server.key
 - OPTIONAL: If required, instructions are there for generating self-signed ca and key
@@ -21,12 +30,6 @@ This repo contains all the files and instructions for setting up x509 Spinnaker 
 - Sample spin-cli command
 
 
-## Setup Instructions
-- Create server-certs, JKS and create k8s secret for gate.jks
-- Deploy opsmx-gate-x509, ensure that the JKS is mounted correct
-- Create the k8s service
-- Create a LoadBalancer that routes traffic to the k8s service WITHOUT TLS termination or modification
-[ use of Ingress is discouraged. If we need to tls-passthrough must be enabled and tls-termination should be configured in the ingress]
 
 ## Testing Instructions
 - Follow the instructions in the "CLIENT-CERTS" folder
