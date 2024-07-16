@@ -15,6 +15,8 @@
 - ```spin -k app list``` to check
 - ```spin -k pi exec -a APPNAME -n PIPE-NAME``` to execute a pipeline
 - ```spin -k pi exec -h``` to get help, type as much as you can and put -h to get specific help
+- Note: using "-k" option is mandatory unless you are using public certs known to the OS.
+
 
 # Executing a pipeline with parameters
 - POST a json as shown below to the /pipelines/{application name}/{pipeline-name} end point. E.g.
