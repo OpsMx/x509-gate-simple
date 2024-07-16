@@ -1,6 +1,18 @@
 # x509-gate
 This repo contains all the files and instructions for setting up x509 Spinnaker gate
 
+## Setup Instructions
+- YAMLs folder: create ONLY the k8s service and LoadBalancer (1st 2 steps)
+- SERVER-CERTS folder: Create server-certs, ensuring that LB address (created above) is in the subjectAltName
+- JKS folder: JKS and create k8s secret for gate.jks
+- YAMLS folder: Create the x509-secret and Deploy opsmx-gate-x509 deployment, ensure that the pod comes to running status and remains there for a min or two
+
+## Testing Instructions
+- Follow the instructions in the "CLIENT-CERTS" folder, ensure to use the SAME ca.crt and ca.key as was used for creating server.crt/key
+- Once client.crt and client.key are generated, test it using curl
+- if it does not work, test it from inside the halyard pod (copy the ca.crt, client.crt+key into the pod)
+- Once that works, test it from the external/LB URL.
+
 ## SERVER-CERTS folder contains 
 - Instructions for creating server.crt and server.key
 - OPTIONAL: If required, instructions are there for generating self-signed ca and key
@@ -20,17 +32,4 @@ This repo contains all the files and instructions for setting up x509 Spinnaker 
 - Configuring .spin/config for using spin-cli
 - Sample spin-cli command
 
-
-## Setup Instructions
-- Create server-certs, JKS and create k8s secret for gate.jks
-- Deploy opsmx-gate-x509, ensure that the JKS is mounted correct
-- Create the k8s service
-- Create a LoadBalancer that routes traffic to the k8s service WITHOUT TLS termination or modification
-[ use of Ingress is discouraged. If we need to tls-passthrough must be enabled and tls-termination should be configured in the ingress]
-
-## Testing Instructions
-- Follow the instructions in the "CLIENT-CERTS" folder
-- Once client.crt and client.key are generated, test it using curl
-- if it does not work, test it from inside the halyard pod (copy the ca.crt, client.crt+key into the pod)
-- Once that works, test it from the external/LB URL.
 
