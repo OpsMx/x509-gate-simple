@@ -5,7 +5,7 @@
 - Update redis URL (and password as required)
 - Update JKS password (from "changeit") for production use
 - Update any Datadog config, if required
-- ```k apply -f x509-secret.yml```
+- ```k apply -f x509-secret.yml``` # disable fiat if RBAC is disabled by editing the file (approx line no. 140)
 
 ### Create the gate deployment
 - ```k apply -f stg-opsmx-gate-x509deploy.yml```
