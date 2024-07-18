@@ -1,10 +1,11 @@
 # Instructions for creating server certs
 ## Need openssl command, openssl-server.cnf, openssl-ca.cnf. In addition ca.crt add ca.key are referenced in openssl-ca.cnf
 
-## IF NO CA.cert and ca.key is available generate your own, 
+## IF NO CA.cert and ca.key is available generate your own for testing purposes only, 
 - ```openssl req -x509 -newkey rsa:4096 -keyout ca.key -out ca.crt -sha256 -days 3650 -subj "/C=US/ST=CA/L=SFO/O=OpsMx/OU=CustomerSuccess/CN=OpsmxSelfSignedCA" ```
 - Enter a strong key password, twice, and SAVE THE PASSWORD. This will be used for signing a cert+key everytime we need to generate a new one
 - Check your CA: ```openssl x509 -text -in ca.crt```
+- For Production use, please use ensure that the server and client certs are signed by your organization's CA.
 
 ## Generate server.crt and server.key
 #Create Key , give password
