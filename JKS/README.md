@@ -2,6 +2,8 @@
 ## "keytool" command comes with Java JDK (not JRE), install it if required
 ## "changeit" is the password used. For prod, please do actually "change" the password
 
+#Remain in the SERVER-CERTS folder and follow the below instructions
+
 #Create gate.p12 with server.crt and key in it
 - ```openssl pkcs12 -export -clcerts -in server.crt -inkey server.key -out gate.p12 -name gate -passin pass:```  #Enter password twice "changeit"
   
