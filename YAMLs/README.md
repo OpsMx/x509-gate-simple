@@ -1,5 +1,5 @@
-```k apply -f stg-opsmx-gate-x509svc.yml``` # Create servive
-### Configure the loadbalancer to route to the service created
+1. ```k apply -f stg-opsmx-gate-x509svc.yml``` # Create servive
+2. Configure the loadbalancer to route to the service created
 
 ### Create the gate secret gate config from x509-secret.yml file
 - Update redis URL (and password as required)
