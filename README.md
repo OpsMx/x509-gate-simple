@@ -2,7 +2,7 @@
 This repo contains all the files and instructions for setting up x509 Spinnaker gate
 
 ## Setup Instructions
-- YAMLs folder: create ONLY the k8s service and LoadBalancer (1st 2 steps)
+- YAMLs folder: **create ONLY the k8s service and LoadBalancer (1st 2 steps)**
 - SERVER-CERTS folder: Create server-certs, ensuring that LB address (created above) is in the subjectAltName
 - JKS folder: JKS and create k8s secret for gate.jks
 - YAMLS folder: Create the x509-secret and Deploy opsmx-gate-x509 deployment, ensure that the pod comes to running status and remains there for a min or two
