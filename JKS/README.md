@@ -15,7 +15,8 @@
   
 #Check, it should show 2 entries, one for gate and one for ca
 - ```keytool -list -keystore gate.jks```
-
+- Ensure it shows **Your keystore contains 2 entries**
+  
 ## Create secret (k aliased to "kubectl -n NameSpace --kubeconfig <..> --context..."
 - ```k delete secret x509gatejks```
 - ```k create secret generic x509gatejks --from-file gate.jks```
